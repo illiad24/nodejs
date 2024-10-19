@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1><%= data %></h1>
+    <form class="add-form">
+        <div class="add-form__line">
+            <label for="title" class="add-form__title">Title:</label>
+ 
+            <input name="title" id="title" placeholder="Enter product title" type="text">
+        </div>
+ 
+        <div>
+            <label for="price" class="add-form__title">Price:</label>
+ 
+            <input name="price" class="add-form__input" id="price" placeholder="Enter product price" type="text">
+        </div>
+ 
+        <div>
+            <label for="image" class="add-form__title">Product image:</label>
+ 
+            <input name="image" class="add-form__input" id="image" type="file">
+        </div>
+ 
+        <div>
+            <label for="description" class="add-form__title">Product description:</label>
+ 
+            <textarea name="description" id="description" class="add-form__input" placeholder="Enter product description"></textarea>
+        </div>
+ 
+        <button type="submit" class="add-form__button">Add product</button>
+    </form>
+</body>
+</html>

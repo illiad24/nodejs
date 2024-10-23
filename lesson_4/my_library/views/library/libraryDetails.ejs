@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>Document</title>
+</head>
+<body>
+            <div class="item">
+                <div class="item__image">
+                    <img src="<%=product.image%>" alt="Image">
+                </div>
+                <div class="item__content">
+                    <a href="/libraries/<%=product.id%>" target="_blank" class="item__title"><%=product.title%> </a>
+                    <div class="item__describe"><%=product.describe%></div>
+                    <div class="item__price">
+                        <%=product.price%>
+                    </div>
+                    <div class="item__amount">
+                        amount---- <%=product.amount%>
+                    </div>
+              
+                    <a href="/libraries">До списку товарів</a>
+                </div>
+            </div>
+        
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1><%= product.id ? 'Редагувати товар' : 'Додати товар' %></h1>
+    <form action="<%= product.id ? '/libraries/edit/' + product.id + '?_method=PUT' : '/libraries/create' %>" method="post">
+      <label>
+        Назва товару
+        <input type="text" name="title" />
+      </label>
+      <label>
+        Кількість товару
+        <input type="number" name="amount" />
+      </label>
+      <label>
+        Ціна одиниці товару
+        <input type="number" name="price" />
+      </label>
+      <label>
+       Поилання на зображення
+        <input type="text" name="image" />
+      </label>
+      <button type="submit"><%= product.id ? 'Оновити' : 'Додати' %></button>
+    </form>
+  </body>
+</html>

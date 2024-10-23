@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>Document</title>
+    <script>
+       async function deleteProduct(id) {
+      console.log('=======deleteProduct')
+      console.log(id)
+
+      try {
+        const response = await fetch('/libraries/', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id }),
+        })
+
+        if (response.ok) {
+          console.log('Product deleted successfully')
+          // Перенаправлення на список товарів після видалення
+          window.location.href = '/libraries'
+        } else {
+          console.error('Failed to delete product')
+        }
+      } catch (error) {
+        console.error('Error:', error)
+      }
+    }
+    </script>
+</head>
+<body>
+    <div class="items">
+        <%products.forEach(product=>{%>
+
+            <div class="item">
+                <div class="item__image">
+                    <img src="<%=product.image%>" alt="Image">
+                </div>
+                <div class="item__content">
+                    <a href="/libraries/<%=product.id%>" class="item__title"><%=product.title%> </a>
+                    <div class="item__describe"><%=product.describe%></div>
+                    <div class="item__price">
+                        <%=product.price%>
+                    </div>
+                    <div class="item__actions">
+                        <a href="/libraries/edit/<%=product.id%>" type="button" class="item__act">Edit</ф>
+                        <button  onclick="deleteProduct(<%=product.id %>)" >Delete</button>
+                    </div>
+                  
+                </div>
+            </div>
+            <%})%>
+    </div>
+    <a href="/libraries/create" class="item__link">Create Book</a>
+</body>
+</html>

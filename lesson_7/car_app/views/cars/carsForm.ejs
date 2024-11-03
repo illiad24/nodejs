@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1><%= car.id ? 'Редагувати товар' : 'Додати товар' %></h1>
+    <form enctype="multipart/form-data" action="<%= car.id ? '/cars/edit/' + car.id  : '/cars/create' %>" method="post">
+      <label>
+       Марка машини
+        <input type="text" name="title"    value="<%= data ? data.title : '' %>"/>
+      </label>
+      <label>
+        Рік випуску
+        <input type="number" name="year"  value="<%= data ? data.year : '' %>" />
+      </label>
+      <label>
+        Номера автомобіля 
+        <input type="text" name="carNumber" value="<%= data ? data.carNumber : '' %>" />
+      </label>
+      <label>
+        Ціна автомобіля
+        <input type="number" name="price" value="<%= data ? data.price : '' %>" />
+      </label>
+      <label>
+       Поилання на зображення
+       <input type="file" name="carImg" />
+      </label>
+      <button type="submit"><%= car.id ? 'Оновити' : 'Додати' %></button>
+    </form>
+    <% if (errors?.length > 0) { %>
+        <ul>
+          <% errors.forEach(function(error) { %>
+          <li><%= error.msg %></li>
+          <% }) %>
+        </ul>
+        <hr />
+        <% } %>
+  </body>
+</html>

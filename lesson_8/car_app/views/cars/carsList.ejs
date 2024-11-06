@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>Document</title>
+    <script>
+       async function deleteProduct(id) {
+      try {
+        const response = await fetch('/cars/', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id }),
+        })
+
+        if (response.ok) {
+          console.log('Car deleted successfully')
+          window.location.href = '/cars'
+        } else {
+          console.error('Failed to delete car')
+        }
+      } catch (error) {
+        console.log('error')
+        console.error('Error:', error)
+      }
+    }
+    </script>
+</head>
+<body>
+    <!-- Задача 1. Розробити додаток для автопарку 
+    (марка авто, рік випуску, номер, зображення)
+     з такими функціональними можливостями: -->
+    <div class="items">
+        <%cars.forEach(car=>{%>
+
+            <div class="item">
+                <div class="item__image">
+                    <img src="<%=car.carImg%>" alt="Image">
+                </div>
+                <div class="item__content">
+                    <a href="/cars/<%=car.id%>" class="item__title"><%=car.title%> </a>
+                    <div class="item__year"><%=car.year%></div>
+                    <div class="item__year"><%=car.carNumber%></div>
+                    <div class="item__year"><span>OWNER --------</span><%=car.owner?.firstName || car.owner%></div>
+                    <div class="item__year"><span>addres --------</span><%=car.owner?.addres || car.owner%></div>
+                    <div class="item__price">
+                        <%=car.price%>
+                    </div>
+                    <div class="item__actions">
+                        <a href="/cars/edit/<%=car.id%>" type="button" class="item__act">Edit</a>
+                        <button  onclick="deleteProduct('<%=car.id %>')" >Delete</button>
+                    </div>
+                </div>
+            </div> 
+            <%})%>
+    </div>
+    <a href="/cars/create" class="item__link">add car</a>
+    <br>
+    <a href="/" class="item__link">На головну</a>
+</body>
+</html>

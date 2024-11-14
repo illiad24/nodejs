@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>addProductForm</title>
+</head>
+<body>
+    <form action="addProduct" method="post">
+        <label >
+                назва товару
+            <input type="text" name="title">
+        </label>
+        <label >
+                ціна
+            <input type="number" name="price">
+        </label>
+        <label >
+                кількість
+                <input type="number" name="count">
+        </label>
+        <button type="submit" class="button">add product</button>
+    </form>
+    <% if (errors?.length > 0) { %>
+        <hr>
+        <ul>
+          <% errors.forEach(function(error) { %>
+          <li><%= error.msg %></li>
+          <% }) %>
+        </ul>
+        <hr />
+        <% } %>
+</body>
+</html>

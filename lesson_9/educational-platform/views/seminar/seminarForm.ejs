@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form cource</title>
+</head>
+<body>
+    <form action="/courses/seminar<%= data?.id ? '/' + data.id : '' %>" method="post">
+        <label >
+            Назва семінару
+            <input type="text" name="topic"  required>
+        </label>
+        <label >
+            Тривалість семінару у годинах
+            <input type="text" name="duration"  required>
+        </label>
+        <label >
+            <select name="responsibleStudent"  required>
+                <% if (options) { %>
+                <% options.forEach(option => { %>
+                    <option value="<%= option._id%>"><%= option.name%></option>
+                    <%})%>
+                    <%}%>
+            </select>
+        </label>
+        <button type="submit" class="button">Додати</button>
+    </form>
+    <% if (errors.length > 0) { %>
+        <hr>
+        <ul style="color: red;">
+          <% errors.forEach(function(error) { %>
+          <li><%= error.msg %></li>
+          <% }) %>
+        </ul>
+        <hr />
+        <% } %>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>form</title>
+
+</head>
+<body>
+    <form action="/students/register<%= data?.id ? '/' + data.id : '' %>" method="post">
+        <label >
+            ім'я
+            <input type="text" name="name" value="<%= data ? data.name : '' %>" >
+        </label>
+        <label >
+            вік
+            <input type="text" name="age" value="<%= data ? data.age : '' %>" >
+        </label>
+        <label >
+            середній бал  
+            <input type="text" name="averageMark" value="<%= data ? data.averageMark : '' %>" >
+        </label>
+        <button type="submit" class="button"> <%= data?.id ? 'Оновити': 'Додати' %></button>
+    </form>
+    <% if (errors.length > 0) { %>
+        <hr>
+        <ul>
+          <% errors.forEach(function(error) { %>
+          <li><%= error.msg %></li>
+          <% }) %>
+        </ul>
+        <hr />
+        <% } %>
+</body>
+</html>

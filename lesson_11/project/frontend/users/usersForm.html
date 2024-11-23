@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Форма</title>
+    <!-- Підключення CSS для стилів -->
+    <link rel="stylesheet" href="../style/main.css" />
+    <!-- Підключення необхідних скриптів -->
+    <script src="../scripts/RequestManager.js"></script>
+    <script src="../scripts/settings.js"></script>
+    <script src="../scripts/HeaderManager.js"></script>
+    <script src="../scripts/UsersApiManager.js"></script>
+    <script src="../scripts/FormManager.js"></script>
+  </head>
+  <body>
+    <script>
+      // Використання класу HeaderManager для створення заголовка з меню
+      document.addEventListener("DOMContentLoaded", () => {
+        new HeaderManager("products/form.html", menuItems)
+      })
+    </script>
+    <div id="product-form"></div>
+<div id="messages"></div>
+<div id="errors"></div>
+    <script>
+      //Знаходження продукту за id
+      async function getUserData(id) {
+        try {
+          return await UsersApiManager.getUserById(id)
+        } catch (error) {
+          console.log(error)
+        }
+      }
+      window.addEventListener("beforeunload", (e) => {
+        localStorage.removeItem("productId")
+      })
+      window.onload = async function () {
+        const userId = localStorage.getItem("id")
+        let user = null
+
+        if (userId) user = await getUserData(userId)
+
+        const authMessageContainer = document.getElementById("messages")
+
+        if (!RequestManager.isAuthenticated()) {
+          authMessageContainer.style.display = "block"
+          return
+        }
+
+        const formObj = new FormManager(
+          [
+            { label: "Ім'я", type: "text", name: "username" },
+            { label: "email", type: "email", name: "price" },
+            { label: "password", type: "password", name: "password" },
+          ],
+          submitCallback,
+          user || {}
+        )
+        formObj.render('product-form')
+
+        async function submitCallback(data) {
+          try {
+            // Виконуємо запит на додавання через UsersApiManager
+            if (user?._id)
+            console.log(1)
+              return await UsersApiManager.editUser(
+                user._id,
+                formObj.form
+              )
+            await UsersApiManager.addUser(formObj.form)
+          } catch (error) {
+            console.log(error)
+            // Відображаємо повідомлення про помилку у разі невдалої авторизації
+            document.getElementById("messages").innerText =     "Помилка створення продукту: " + error.message
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
